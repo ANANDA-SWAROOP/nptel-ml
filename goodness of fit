@@ -1,0 +1,30 @@
+#ground truth
+gt = [48,70,83,90]
+m = [-0.5,-0.4,-0.3,-0.2]
+#lr model
+w0 = 99.57
+w1 = 79.28
+#se
+se = 0
+for index,value in enumerate(gt):
+    se += ((w0 + w1*m[index]) - value)**2
+print(se)
+
+mean = 0
+sr = 0
+for i in gt:
+    mean+=i
+mean /= len(gt)
+print(len(gt),mean)
+for index,value in enumerate(gt):
+    sr += ((w0 + w1*m[index]) - mean)**2
+print(sr)
+
+st = 0
+for index,value in enumerate(gt):
+    st += (value - mean)**2
+print(st)
+
+
+r2 = 1 - (se/st)
+print(r2)
